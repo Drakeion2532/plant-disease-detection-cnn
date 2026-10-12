@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leaf Doctor</title><style>
+body{font-family:system-ui,sans-serif;background:#f0fdf4;color:#14532d;margin:0;display:flex;justify-content:center}
+.w{max-width:640px;width:100%;padding:40px 16px}h1{margin:0}.drop{display:block;border:3px dashed #86efac;border-radius:16px;padding:40px;text-align:center;background:#fff;cursor:pointer;margin:20px 0}
+img{max-width:100%;border-radius:12px}.r{background:#fff;border-radius:14px;padding:18px;margin-top:16px;box-shadow:0 2px 10px #0001}
+.big{font-size:24px;font-weight:800}.bar{height:8px;background:#dcfce7;border-radius:4px}.bar div{height:100%;background:#16a34a;border-radius:4px}.alt{color:#4b5563;font-size:14px}
+</style></head><body><div class="w"><h1>🌿 Leaf Doctor</h1><p>Photograph a single leaf on a plain background. Covers 14 crops and 38 classes (PlantVillage).</p>
+<label class="drop"><input id="f" type="file" accept="image/*" capture="environment" hidden>📷 Tap to take or upload a photo</label>
+<div id="prev"></div><div id="out"></div></div><script>
+document.getElementById('f').onchange=async e=>{const file=e.target.files[0];if(!file)return;
+ document.getElementById('prev').innerHTML=`<img src="${URL.createObjectURL(file)}">`;
+ const fd=new FormData();fd.append('file',file);document.getElementById('out').innerHTML='<p>Analysing…</p>';
+ const d=await (await fetch('/predict',{method:'POST',body:fd})).json();const [b,...rest]=d.predictions;
+ document.getElementById('out').innerHTML=`<div class="r"><div class="alt">${b.plant}</div><div class="big">${b.disease}</div>
+ <div class="bar"><div style="width:${b.confidence*100}%"></div></div><p>${(b.confidence*100).toFixed(1)}% confidence</p><p><b>What to do:</b> ${b.advice}</p>
+ <p class="alt">Other possibilities: ${rest.map(r=>`${r.plant} – ${r.disease} (${(r.confidence*100).toFixed(1)}%)`).join(', ')}</p></div>`;};
+</script></body></html>

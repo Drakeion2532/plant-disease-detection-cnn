@@ -1,5 +1,7 @@
 # Plant Disease Detection with a CNN: 38 Classes, 99.05% Test Accuracy
 
+[![tests](https://github.com/Drakeion2532/plant-disease-detection-cnn/actions/workflows/tests.yml/badge.svg)](https://github.com/Drakeion2532/plant-disease-detection-cnn/actions/workflows/tests.yml)
+
 This project identifies **26 diseases across 14 crops** (38 classes including healthy leaves) from a single leaf photo. It then tells the farmer **what to do next**. The repo includes a training pipeline, an evaluation report, a CLI predictor and a mobile-friendly web app.
 
 It is my from-scratch PyTorch re-implementation of **M. Chohan, A. Khan, R. Chohan, S. H. Katpar, M. S. Mahar, "Plant Disease Detection using Deep Learning", *IJRTE* 9(1), 2020** ([DOI 10.35940/ijrte.A2139.059120](https://doi.org/10.35940/ijrte.A2139.059120)). The paper reports **98.3%** test accuracy, and this replication reaches **99.05%** on a 15% held-out test set while training on a 2-core CPU.
@@ -10,7 +12,7 @@ It is my from-scratch PyTorch re-implementation of **M. Chohan, A. Khan, R. Choh
 
 ## Why it matters
 
-Plant diseases destroy up to 20–40% of global crop yield. In India, a smallholder farmer often waits days for an agronomist, while late blight can wipe out a tomato field in under a week. A phone photo plus an instant diagnosis and first-response advice shortens that gap.
+Pests and plant diseases cost an estimated 20–40% of global crop production each year (FAO). In India, a smallholder farmer often waits days for an agronomist, while late blight can wipe out a tomato field in under a week. A phone photo plus an instant diagnosis and first-response advice shortens that gap.
 
 ## Results (8,146 unseen test images)
 
@@ -48,7 +50,7 @@ Each prediction comes with **farmer-facing guidance** (`plantdoc/advice.py`), fo
 pip install -r requirements.txt
 
 # try it immediately with the trained model + sample leaves
-python -m plantdoc.predict "data/sample/Tomato___Late_blight/"*.jpg
+python -m plantdoc.predict data/sample/Tomato___Late_blight/*
 uvicorn app.app:app --port 8004            # web app at http://127.0.0.1:8004
 
 # reproduce training (~1.7 GB download, ~45 min on 2 CPU cores, a few minutes on a GPU)
@@ -66,7 +68,7 @@ pytest -q
 
 ## Limitations and next steps
 
-* PlantVillage photos are single leaves on plain backgrounds. Accuracy drops on in-field photos with clutter, which is a known domain-shift problem. The next step is fine-tuning on [PlantDoc](https://github.com/pratikkayal/PlantDoc-Dataset) field images.
+* **The 99% is a lab number.** PlantVillage photos are single leaves on plain backgrounds, and many images were taken under near-identical conditions, so a random split rewards learning the setup as much as the disease. The original PlantVillage study (Mohanty et al., 2016) found accuracy fell to about 31% on images from other sources. Treat 99.05% as "the pipeline works", not as field accuracy. The next step is fine-tuning on [PlantDoc](https://github.com/pratikkayal/PlantDoc-Dataset) field images.
 * Add a "not a leaf / unknown crop" rejection class (the paper's suggested 3-stage pipeline).
 * Export to ONNX / TFLite for offline use on low-end Android phones.
 

@@ -30,6 +30,18 @@ Pests and plant diseases cost an estimated 20–40% of global crop production ea
 
 > Training loss sits above validation loss because training uses label smoothing (0.05) and heavy augmentation, while validation sees clean images. This is expected and is not a sign of under-fitting.
 
+## It won't diagnose things that aren't leaves
+
+A classifier trained on 38 leaf classes always answers with one of them, whatever it is shown. Before this check, a **drawing of a graph** came back as *"Tomato late blight, 89%: URGENT, destroy infected plants"*, and a **plain green square** as *"healthy corn, 99%"*. Telling a farmer to destroy a crop on that basis is worse than giving no answer, so every photo now goes through three steps first:
+
+| Check | Catches | Reply to the farmer |
+|---|---|---|
+| Almost no contrast | blank, black or blurry photos | "Photo too blank: retake in daylight…" |
+| Under 5% leaf-coloured pixels (green, yellow, brown) | screenshots, documents, charts, people, objects | "No leaf found: photograph a single leaf…" |
+| Model confidence under 50% | crops the model doesn't cover, poor photos | "Not sure: retake it, or show it to your local Krishi Vigyan Kendra" |
+
+On the 76 sample leaves and 24 non-leaf images (screenshots, charts, noise, plain colours), **all 76 leaves are diagnosed and all 24 non-leaves are refused**. The thresholds were chosen on these same images, so treat this as a sanity check, not a measured rejection rate. A photo of green foliage that isn't a single leaf will still pass the colour check; that is the case the "not sure" step is for.
+
 ## Method (following the paper)
 
 | | Paper | This implementation |

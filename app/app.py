@@ -11,7 +11,7 @@ from fastapi.responses import HTMLResponse
 from PIL import Image, UnidentifiedImageError
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from plantdoc.predict import Predictor  # noqa: E402
+from plantdoc.predict import Predictor, diagnose  # noqa: E402
 
 app = FastAPI(title="Plant Disease Detector")
 predictor = Predictor()
@@ -32,4 +32,4 @@ async def predict(file: UploadFile = File(...)):
         img = Image.open(io.BytesIO(data))
     except UnidentifiedImageError:
         raise HTTPException(415, "not an image")
-    return {"predictions": predictor(img)}
+    return diagnose(predictor, img)

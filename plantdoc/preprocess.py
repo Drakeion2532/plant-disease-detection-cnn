@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Shubhan Punde · https://github.com/Drakeion2532/plant-disease-detection-cnn · MIT licence · sp2532-b9bf6fd70ab1
 """Resize every PlantVillage image once and cache as a uint8 numpy array so
 training does not re-decode 54k JPEGs every epoch."""
 from __future__ import annotations

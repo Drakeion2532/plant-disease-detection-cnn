@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Shubhan Punde · https://github.com/Drakeion2532/plant-disease-detection-cnn · MIT licence · sp2532-b9bf6fd70ab1
 import numpy as np
 import torch
 

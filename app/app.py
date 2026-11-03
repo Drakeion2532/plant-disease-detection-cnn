@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Shubhan Punde · https://github.com/Drakeion2532/plant-disease-detection-cnn · MIT licence · sp2532-b9bf6fd70ab1
 """Web app: upload a leaf photo, get the disease + what to do.
 
     uvicorn app.app:app --port 8004   ->  http://127.0.0.1:8004

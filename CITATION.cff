@@ -9,10 +9,6 @@ authors:
 repository-code: "https://github.com/Drakeion2532/plant-disease-detection-cnn"
 license: MIT
 date-released: "2026-11-03"
-identifiers:
-  - type: other
-    value: "sp2532-b9bf6fd70ab1"
-    description: "Project identifier"
 references:
   - type: article
     title: "Plant Disease Detection using Deep Learning"

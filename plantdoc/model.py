@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Shubhan Punde · https://github.com/Drakeion2532/plant-disease-detection-cnn · MIT licence · sp2532-b9bf6fd70ab1
+# Copyright (c) 2026 Shubhan Punde · MIT licence
 """CNN from Chohan et al. (2020), 'Plant Disease Detection using Deep Learning':
 five 3x3 convolution blocks, each followed by batch normalisation and 2x2
 max-pooling, then a dense layer and a 38-way softmax."""

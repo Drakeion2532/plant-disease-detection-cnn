@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Shubhan Punde · https://github.com/Drakeion2532/plant-disease-detection-cnn · MIT licence · sp2532-b9bf6fd70ab1
+# Copyright (c) 2026 Shubhan Punde · MIT licence
 """Predict the disease in one or more leaf photos.
 
     python -m plantdoc.predict path/to/leaf.jpg [more.jpg ...]

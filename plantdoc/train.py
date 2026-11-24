@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Shubhan Punde · https://github.com/Drakeion2532/plant-disease-detection-cnn · MIT licence · sp2532-b9bf6fd70ab1
+# Copyright (c) 2026 Shubhan Punde · MIT licence
 """Train + evaluate the PlantVillage CNN.
 
 Split: 70% train / 15% validation / 15% test (stratified, seed 42) – the
